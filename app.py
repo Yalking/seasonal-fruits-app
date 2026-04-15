@@ -44,7 +44,7 @@ for k, v in defaults.items():
 # helpers
 # -------------------------
 def get_image_path(item_name: str):
-    path = IMAGES_DIR / f"{item_name}.png"
+    path = IMAGES_DIR / f"{item_name}.jpg"
     return path if path.exists() else None
 
 def get_month_items(month):
@@ -136,7 +136,7 @@ def render_card(item, month, compact=False):
         if image_path:
             st.image(str(image_path), use_container_width=True)
         else:
-            st.caption(f"未找到图片：images/{item['name']}.png")
+            st.caption(f"未找到图片：images/{item['name']}.jpg")
 
         top_left, top_right = st.columns([4, 1])
         with top_left:
