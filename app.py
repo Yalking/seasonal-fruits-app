@@ -1,7 +1,7 @@
 import json
+import random
 from datetime import datetime
 from pathlib import Path
-import time
 
 import streamlit as st
 
@@ -25,11 +25,24 @@ st.markdown("""
 }
 
 /* 主容器样式 */
+html, body, [data-testid="stAppViewContainer"] {
+    background: #EEF1F4;
+}
+
+[data-testid="stAppViewContainer"] > .main {
+    display: flex;
+    justify-content: center;
+}
+
 .main .block-container {
-    max-width: 100%;
+    width: min(100%, 390px);
+    max-width: 390px;
+    min-height: 100vh;
     padding: 0.5rem;
     padding-top: 1rem;
     padding-bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 1px rgba(22, 28, 45, 0.06), 0 18px 60px rgba(22, 28, 45, 0.12);
 }
 
 /* 标题样式 */
@@ -118,89 +131,116 @@ div[class*="st-key-view_"] > button {
     color: #2E7D32;
 }
 
+div.st-key-refresh_today_recommendations button {
+    min-height: 36px !important;
+    padding: 0 14px !important;
+    border-radius: 999px !important;
+    background: #FFFFFF !important;
+    color: #4A4F57 !important;
+    border: 1px solid #E5E7EB !important;
+    box-shadow: none !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+div.st-key-refresh_today_recommendations button:hover {
+    background: #F8F9FB !important;
+    color: #343A40 !important;
+    border-color: #D9DDE3 !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
 /* 收藏按钮 */
-div[class*="st-key-fav_"] > button {
-    width: 48px;
-    min-width: 48px;
-    height: 48px;
-    min-height: 48px;
+div[class*="st-key-favwrap_"] div[data-testid="stButton"] > button {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    min-height: 38px;
     padding: 0;
-    border-radius: 50%;
-    background: #FFFFFF;
-    border: 2px solid #E0E0E0;
-    color: #757575;
+    border-radius: 12px;
+    background: #F3F4F7;
+    border: 1px solid #E1E4EA;
+    color: #8B93A1;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+    transform: none !important;
 }
 
-div[class*="st-key-fav_"] > button:hover {
-    background: #E8F5E9;
-    border-color: #4CAF50;
-    color: #2E7D32;
-    transform: scale(1.1);
+div[class*="st-key-favwrap_"] div[data-testid="stButton"] > button:hover {
+    background: #ECEFF4;
+    border-color: #D5DAE3;
+    color: #6F7785;
+    transform: none;
+    box-shadow: none !important;
 }
 
-div[class*="st-key-fav_on_"] > button {
-    background: #4CAF50;
-    border-color: #4CAF50;
-    color: white;
+div[class*="st-key-favwrap_on_"] div[data-testid="stButton"] > button {
+    background: #F3F4F7;
+    border-color: #DCE7DA;
+    color: #9FD39A;
 }
 
 /* 分类按钮 */
-div[class*="st-key-cat_"] > button {
+div[class*="st-key-cat_"] button {
     min-height: 44px;
-    border-radius: 12px;
-    margin: 4px;
-    background: #F7FBF5 !important;
-    color: #7A8A7A !important;
-    border: 1px solid #E4EFE0 !important;
+    border-radius: 999px;
+    margin: 6px 0;
+    background: #F3F4F7 !important;
+    color: #555B66 !important;
+    border: none !important;
     box-shadow: none !important;
     transition: all 0.2s ease;
+    font-weight: 500 !important;
+    padding: 0 14px !important;
 }
 
-div[class*="st-key-cat_"] > button:hover {
-    background: #EDF7E8 !important;
-    color: #4F6F4F !important;
-    border-color: #D7E8D1 !important;
+div[class*="st-key-cat_"] button:hover {
+    background: #EBEDF2 !important;
+    color: #3F4652 !important;
     transform: none !important;
     box-shadow: none !important;
 }
 
-div[class*="st-key-cat_active_"] > button {
-    background: #DFF2DD !important;
-    color: #2E7D32 !important;
-    border-color: #B9DEB6 !important;
+div[class*="st-key-cat_active_"] button {
+    background: #FF6B4A !important;
+    color: #FFFFFF !important;
+    border: none !important;
     font-weight: 600 !important;
 }
 
 /* 标签按钮 */
-div[class*="st-key-tag2_"] > button {
+div[class*="st-key-tag2_"] button {
     width: auto;
-    min-height: 36px;
-    border-radius: 20px;
+    min-height: 40px;
+    border-radius: 999px;
     padding: 6px 16px;
-    background: #F7FBF5 !important;
-    color: #7A8A7A !important;
-    border: 1px solid #E4EFE0 !important;
+    background: #F3F4F7 !important;
+    color: #555B66 !important;
+    border: none !important;
     font-size: 14px;
     box-shadow: none !important;
     transition: all 0.2s ease;
+    font-weight: 500 !important;
+    padding: 0 14px !important;
 }
 
-div[class*="st-key-tag2_"] > button:hover {
-    background: #EDF7E8 !important;
-    color: #4F6F4F !important;
-    border-color: #D7E8D1 !important;
+div[class*="st-key-tag2_"] button:hover {
+    background: #EBEDF2 !important;
+    color: #3F4652 !important;
     transform: none !important;
     box-shadow: none !important;
 }
 
-div[class*="st-key-tag2_active_"] > button {
-    background: #DFF2DD !important;
-    color: #2E7D32 !important;
-    border-color: #B9DEB6 !important;
+div[class*="st-key-tag2_active_"] button {
+    background: #FF6B4A !important;
+    color: #FFFFFF !important;
+    border: none !important;
     font-weight: 600 !important;
 }
 
@@ -305,7 +345,6 @@ div[data-testid="stImage"] > div > img {
     max-height: 300px;
     overflow-y: auto;
     z-index: 1000;
-    display: none;
 }
 
 /* 返回按钮 */
@@ -333,6 +372,9 @@ div[data-testid="stImage"] > div > img {
 /* 响应式调整 */
 @media (max-width: 768px) {
     .main .block-container {
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
         padding-left: 8px;
         padding-right: 8px;
     }
@@ -363,6 +405,13 @@ div[data-testid="stImage"] > div > img {
         color: #ffffff;
     }
 }
+
+@media (min-width: 769px) {
+    .main .block-container {
+        border-radius: 28px 28px 0 0;
+        margin-top: 12px;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -382,17 +431,19 @@ default_month = current_month if current_month in months else months[0]
 # 初始化session state
 defaults = {
     "page": "home",
-    "selected_month": default_month,
     "selected_item": None,
-    "selected_category": "all",
-    "selected_tag": "all",
     "favorites": [],
-    "search_input": "",
-    "search_history": [],
-    "keyword": "",
     "last_main_page": "home",
-    "loading": False,
-    "search_suggestions": [],
+    "home_month": default_month,
+    "discover_month": default_month,
+    "discover_category": "all",
+    "discover_tag": "all",
+    "discover_search_input": "",
+    "discover_search_input_pending": None,
+    "discover_keyword": "",
+    "discover_search_suggestions": [],
+    "favorites_month_filter": "全部月份",
+    "favorites_confirm_clear": False,
 }
 
 for k, v in defaults.items():
@@ -403,7 +454,28 @@ for k, v in defaults.items():
 def normalize_key(text):
     return str(text).replace(" ", "_").replace("/", "_")
 
-def get_image_path(item_name: str):
+def make_item_ref(item_name, month=None):
+    return f"{month}::{item_name}" if month else item_name
+
+def parse_item_ref(item_ref):
+    if isinstance(item_ref, str) and "::" in item_ref:
+        month, item_name = item_ref.split("::", 1)
+        return item_name, month
+    return item_ref, None
+
+def is_favorite(item_name, month=None):
+    favorites = st.session_state.favorites
+    item_ref = make_item_ref(item_name, month)
+    return item_ref in favorites or item_name in favorites
+
+def get_image_path(item: dict):
+    configured_path = item.get("image")
+    if configured_path:
+        configured = BASE_DIR / configured_path
+        if configured.exists():
+            return configured
+
+    item_name = item["name"]
     for ext in [".jpg", ".jpeg", ".png", ".webp"]:
         path = IMAGES_DIR / f"{item_name}{ext}"
         if path.exists():
@@ -417,14 +489,22 @@ def get_month_items(month):
 def is_fruit(item, month):
     return any(x["name"] == item["name"] for x in data[month].get("fruits", []))
 
-def get_item_by_name(name):
+def get_item_by_name(name, month=None):
     if not name:
         return None, None
+    if month:
+        for item in get_month_items(month):
+            if item["name"] == name:
+                return item, month
     for month in months:
         for item in get_month_items(month):
             if item["name"] == name:
                 return item, month
     return None, None
+
+def get_item_by_ref(item_ref):
+    item_name, month = parse_item_ref(item_ref)
+    return get_item_by_name(item_name, month)
 
 def get_all_tags(month):
     tags = set()
@@ -442,12 +522,30 @@ def get_all_tags(month):
 def get_secondary_tags(month):
     return [t for t in get_all_tags(month) if t not in ["全部", "水果", "蔬菜"]]
 
+def show_toast(message):
+    if hasattr(st, "toast"):
+        st.toast(message)
+    else:
+        st.info(message)
+
+def render_responsive_image(image_path):
+    try:
+        st.image(str(image_path), width="stretch")
+    except TypeError:
+        st.image(str(image_path), use_column_width=True)
+
 def get_search_suggestions(query, limit=5):
     suggestions = []
-    query = query.lower()
+    seen = set()
+    query = query.strip().lower()
+    if not query:
+        return suggestions
+
     for month in months:
         for item in get_month_items(month):
-            if query in item["name"].lower():
+            item_name = item["name"]
+            if query in item_name.lower() and item_name not in seen:
+                seen.add(item_name)
                 suggestions.append(item["name"])
                 if len(suggestions) >= limit:
                     break
@@ -455,32 +553,145 @@ def get_search_suggestions(query, limit=5):
             break
     return suggestions
 
-# 状态管理函数
-def toggle_favorite(item_name):
-    favorites = set(st.session_state.favorites)
-    if item_name in favorites:
-        favorites.remove(item_name)
-    else:
-        favorites.add(item_name)
-    st.session_state.favorites = list(favorites)
+def get_random_recommendations(month):
+    fruits = data.get(month, {}).get("fruits", [])
+    vegetables = data.get(month, {}).get("vegetables", [])
+    picks = []
 
-def open_detail(item_name):
-    st.session_state.selected_item = item_name
+    if fruits:
+        fruit_pick = st.session_state.get(f"_today_fruit_{month}")
+        if fruit_pick not in [item["name"] for item in fruits]:
+            fruit_pick = random.choice(fruits)["name"]
+            st.session_state[f"_today_fruit_{month}"] = fruit_pick
+        picks.append(fruit_pick)
+        if picks[0] not in [item["name"] for item in fruits]:
+            picks[0] = fruits[0]["name"]
+    if vegetables:
+        veg_pick = st.session_state.get(f"_today_veg_{month}")
+        if veg_pick not in [item["name"] for item in vegetables]:
+            veg_pick = random.choice(vegetables)["name"]
+            st.session_state[f"_today_veg_{month}"] = veg_pick
+        picks.append(veg_pick)
+
+    items = []
+    for item_name in picks:
+        item, item_month = get_item_by_name(item_name, month)
+        if item:
+            items.append((item, item_month))
+    return items
+
+def refresh_today_recommendations(month):
+    fruits = data.get(month, {}).get("fruits", [])
+    vegetables = data.get(month, {}).get("vegetables", [])
+    if fruits:
+        st.session_state[f"_today_fruit_{month}"] = random.choice(fruits)["name"]
+    if vegetables:
+        st.session_state[f"_today_veg_{month}"] = random.choice(vegetables)["name"]
+
+def get_favorite_entries(month_filter="全部月份"):
+    entries = []
+    for item_ref in st.session_state.favorites:
+        item, month = get_item_by_ref(item_ref)
+        if not item:
+            continue
+        if month_filter != "全部月份" and month != month_filter:
+            continue
+        entries.append({
+            "ref": item_ref,
+            "item": item,
+            "month": month,
+        })
+    return entries
+
+def get_display_favorites(month_filter="全部月份"):
+    entries = get_favorite_entries(month_filter)
+    if month_filter != "全部月份":
+        return entries
+
+    merged = {}
+    for entry in entries:
+        name = entry["item"]["name"]
+        if name not in merged:
+            merged[name] = entry
+            continue
+
+        current_month_idx = months.index(entry["month"])
+        saved_month_idx = months.index(merged[name]["month"])
+        if current_month_idx >= saved_month_idx:
+            merged[name] = entry
+
+    return list(merged.values())
+
+def get_related_items(item, month, limit=2):
+    current_tags = set(item.get("tags", []))
+    current_is_fruit = is_fruit(item, month)
+    candidates = []
+
+    for candidate in get_month_items(month):
+        if candidate["name"] == item["name"]:
+            continue
+        same_category = is_fruit(candidate, month) == current_is_fruit
+        common_tags = len(current_tags & set(candidate.get("tags", [])))
+        score = (
+            2 if same_category else 0,
+            common_tags,
+            candidate["name"],
+        )
+        candidates.append((score, candidate))
+
+    candidates.sort(key=lambda x: (-x[0][0], -x[0][1], x[0][2]))
+    return [candidate for _, candidate in candidates[:limit]]
+
+# 状态管理函数
+def apply_pending_discover_search_input():
+    pending_value = st.session_state.discover_search_input_pending
+    if pending_value is not None:
+        st.session_state.discover_search_input = pending_value
+        st.session_state.discover_search_input_pending = None
+
+def sync_search_state():
+    query = st.session_state.discover_search_input.strip()
+    st.session_state.discover_keyword = query
+    st.session_state.discover_search_suggestions = get_search_suggestions(query)
+
+def submit_discover_search(query=None, sync_input=False):
+    final_query = (query if query is not None else st.session_state.discover_search_input).strip()
+    st.session_state.page = "search"
+    st.session_state.discover_keyword = final_query
+    st.session_state.discover_search_suggestions = get_search_suggestions(final_query)
+    if sync_input:
+        st.session_state.discover_search_input_pending = final_query
+
+def toggle_favorite(item_name, month=None, remove_all_same_name=False):
+    favorites = list(st.session_state.favorites)
+    item_ref = make_item_ref(item_name, month)
+
+    if remove_all_same_name:
+        favorites = [fav for fav in favorites if parse_item_ref(fav)[0] != item_name]
+    elif item_ref in favorites or item_name in favorites:
+        favorites = [fav for fav in favorites if fav not in {item_ref, item_name}]
+    else:
+        favorites.append(item_ref)
+
+    st.session_state.favorites = favorites
+
+def open_detail(item_name, month=None):
+    st.session_state.selected_item = make_item_ref(item_name, month)
     if st.session_state.page != "detail":
         st.session_state.last_main_page = st.session_state.page
     st.session_state.page = "detail"
 
 def go_to_page(page, month=None, keyword=None, category=None, tag=None):
     st.session_state.page = page
-    if month is not None:
-        st.session_state.selected_month = month
     if keyword is not None:
-        st.session_state.keyword = keyword
-        st.session_state.search_input = keyword
+        clean_keyword = keyword.strip()
+        st.session_state.discover_keyword = clean_keyword
+        st.session_state.discover_search_input_pending = clean_keyword
+        st.session_state.discover_search_suggestions = get_search_suggestions(clean_keyword)
     if category is not None:
-        st.session_state.selected_category = category
+        st.session_state.discover_category = category
     if tag is not None:
-        st.session_state.selected_tag = tag
+        st.session_state.discover_tag = tag
 
 
 
@@ -525,58 +736,62 @@ def render_header():
         if st.session_state.page == "home":
             st.title("🥬 应季果蔬")
         elif st.session_state.page == "search":
-            st.title("🔍 搜索")
+            st.title("🔍 发现")
         elif st.session_state.page == "favorites":
             st.title("⭐ 我的收藏")
         elif st.session_state.page == "detail":
-            item, _ = get_item_by_name(st.session_state.selected_item)
+            item, _ = get_item_by_ref(st.session_state.selected_item)
             if item:
                 st.title(item["name"])
 
     with header_col3:
         # 收藏按钮（仅在详情页显示）
         if st.session_state.page == "detail":
-            item, _ = get_item_by_name(st.session_state.selected_item)
+            item, month = get_item_by_ref(st.session_state.selected_item)
             if item:
-                active_fav = item["name"] in st.session_state.favorites
+                active_fav = is_favorite(item["name"], month)
                 icon = "★" if active_fav else "☆"
-                if st.button(icon, key="detail_fav_btn", help="收藏/取消收藏"):
-                    toggle_favorite(item["name"])
-                    st.rerun()
+                wrap_key = f"favwrap_on_detail_{normalize_key(item['name'])}_{month}" if active_fav else f"favwrap_detail_{normalize_key(item['name'])}_{month}"
+                with st.container(key=wrap_key):
+                    if st.button(icon, key="detail_fav_btn", help="收藏/取消收藏"):
+                        toggle_favorite(item["name"], month)
+                        st.rerun()
 
 def render_search_bar():
-    search_col = st.columns([1])[0]
-    with search_col:
+    apply_pending_discover_search_input()
+
+    input_col, action_col = st.columns([5, 1])
+    with input_col:
         # 搜索框
-        search_input = st.text_input(
+        st.text_input(
             "搜索果蔬",
-            value=st.session_state.search_input,
             placeholder="搜索名称或关键词...",
-            key="search_input_field",
-            on_change=lambda: setattr(st.session_state, 'search_suggestions',
-                                     get_search_suggestions(st.session_state.search_input))
+            key="discover_search_input",
+            on_change=sync_search_state
         )
+    with action_col:
+        st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+        if st.button("搜索", key=f"search_page_btn_{st.session_state.page}", use_container_width=True):
+            submit_discover_search()
+            st.rerun()
 
-        # 搜索建议
-        if st.session_state.search_suggestions and st.session_state.search_input:
-            st.markdown("""
-            <div class="search-suggestions">
-            """, unsafe_allow_html=True)
-            for suggestion in st.session_state.search_suggestions:
-                if st.button(suggestion, key=f"suggestion_{normalize_key(suggestion)}", help=f"搜索{suggestion}"):
-                    go_to_page("search", keyword=suggestion)
+    # 搜索建议
+    if st.session_state.discover_search_suggestions and st.session_state.discover_search_input.strip():
+        st.caption("搜索建议")
+        suggestion_cols = st.columns(min(5, len(st.session_state.discover_search_suggestions)))
+        for idx, suggestion in enumerate(st.session_state.discover_search_suggestions):
+            with suggestion_cols[idx % len(suggestion_cols)]:
+                if st.button(suggestion, key=f"suggestion_{normalize_key(suggestion)}", help=f"搜索{suggestion}", use_container_width=True):
+                    submit_discover_search(suggestion, sync_input=True)
                     st.rerun()
-            st.markdown("</div>", unsafe_allow_html=True)
 
-def render_card(item, month, compact=True, source="default"):
-    image_path = get_image_path(item["name"])
+def render_card(item, month, compact=True, source="default", show_view=True, remove_all_same_name_on_unfavorite=False):
+    image_path = get_image_path(item)
 
     with st.container(border=True):
         # 图片
         if image_path:
-            # 添加图片加载延迟优化
-            with st.spinner("加载中..."):
-                st.image(str(image_path), use_container_width=True)
+            render_responsive_image(image_path)
         else:
             st.caption(f"📷 未找到图片：{item['name']}")
 
@@ -585,11 +800,14 @@ def render_card(item, month, compact=True, source="default"):
         with col1:
             st.markdown(f"### {item['name']}")
         with col2:
-            active_fav = item["name"] in st.session_state.favorites
+            active_fav = is_favorite(item["name"], month)
             icon = "★" if active_fav else "☆"
-            if st.button(icon, key=f"fav_{source}_{normalize_key(item['name'])}_{month}_{compact}"):
-                toggle_favorite(item["name"])
-                st.rerun()
+            fav_prefix = "fav_on" if active_fav else "fav"
+            wrap_key = f"favwrap_on_{source}_{normalize_key(item['name'])}_{month}_{compact}" if active_fav else f"favwrap_{source}_{normalize_key(item['name'])}_{month}_{compact}"
+            with st.container(key=wrap_key):
+                if st.button(icon, key=f"{fav_prefix}_{source}_{normalize_key(item['name'])}_{month}_{compact}"):
+                    toggle_favorite(item["name"], month, remove_all_same_name=remove_all_same_name_on_unfavorite and active_fav)
+                    st.rerun()
 
         # 标签
         tags = item.get("tags", [])[:3 if compact else 6]
@@ -608,95 +826,108 @@ def render_card(item, month, compact=True, source="default"):
             st.caption(f"💪 营养：{item.get('nutrition', '暂无信息')}")
 
         # 查看详情按钮
-        if compact:
+        if show_view:
             if st.button("查看详情", key=f"view_{source}_{normalize_key(item['name'])}_{month}_{compact}"):
-                open_detail(item["name"])
+                open_detail(item["name"], month)
                 st.rerun()
 
 def render_home():
+    selected_month = st.selectbox(
+        "📅 选择月份",
+        months,
+        index=months.index(st.session_state.home_month),
+        key="home_month_select",
+        format_func=lambda x: f"{x}"
+    )
+    st.session_state.home_month = selected_month
 
-    # 月份选择器
-    month_col = st.columns([1])[0]
-    with month_col:
-        selected_month = st.selectbox(
-            "📅 选择月份",
-            months,
-            index=months.index(st.session_state.selected_month),
-            key="month_select",
-            format_func=lambda x: f"{x}"
-        )
-        st.session_state.selected_month = selected_month
+    title_col, action_col = st.columns([4, 1])
+    with title_col:
+        st.markdown("## 今日推荐")
+    with action_col:
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        if st.button("换一换", key="refresh_today_recommendations", use_container_width=True):
+            refresh_today_recommendations(selected_month)
+            st.rerun()
 
-    # 搜索框
-    render_search_bar()
+    today_items = get_random_recommendations(selected_month)
+    if today_items:
+        cols = st.columns(2)
+        for idx, (item, month) in enumerate(today_items):
+            with cols[idx % 2]:
+                render_card(item, month, compact=True, source="home_today")
+    else:
+        st.info("这个月份暂时没有可展示的推荐内容。")
 
-    # 本月热门
     st.markdown("## 🔥 本月热门")
-    hot_items = get_month_items(selected_month)[:6]  # 增加到6个
-    cols = st.columns(2 or None)
-    for idx, item in enumerate(hot_items):
-        with cols[idx % 2]:
-            render_card(item, selected_month, compact=True, source="home_hot")
+    hot_items = get_month_items(selected_month)[:6]
+    if hot_items:
+        cols = st.columns(2)
+        for idx, item in enumerate(hot_items):
+            with cols[idx % 2]:
+                render_card(item, selected_month, compact=True, source="home_hot")
+    else:
+        st.info("这个月份暂时没有可展示的热门果蔬。")
 
-    # 分类浏览
-    st.markdown("## 📚 分类浏览")
-    fruit_items = [item for item in get_month_items(selected_month) if is_fruit(item, selected_month)]
-    vegetable_items = [item for item in get_month_items(selected_month) if not is_fruit(item, selected_month)]
-
-    if fruit_items:
-        st.markdown("### 🍎 水果")
-        fruit_cols = st.columns(2 or None)
-        for idx, item in enumerate(fruit_items[:4]):  # 每类最多显示4个
-            with fruit_cols[idx % 2]:
-                render_card(item, selected_month, compact=True, source="home_fruit")
-
-    if vegetable_items:
-        st.markdown("### 🥬 蔬菜")
-        veg_cols = st.columns(2 or None)
-        for idx, item in enumerate(vegetable_items[:4]):
-            with veg_cols[idx % 2]:
-                render_card(item, selected_month, compact=True, source="home_veg")
+    if st.button("去发现更多", key="home_discover_more", use_container_width=True):
+        st.session_state.discover_month = selected_month
+        st.session_state.page = "search"
+        st.rerun()
 
 def render_search():
+    selected_month = st.selectbox(
+        "📅 发现月份",
+        months,
+        index=months.index(st.session_state.discover_month),
+        key="discover_month_select",
+        format_func=lambda x: f"{x}"
+    )
+    month_changed = selected_month != st.session_state.discover_month
+    st.session_state.discover_month = selected_month
+    available_tags = get_secondary_tags(selected_month)
+    if month_changed and st.session_state.discover_tag != "all" and st.session_state.discover_tag not in available_tags:
+        st.session_state.discover_tag = "all"
+        show_toast("月份已切换，不适用的标签已重置为“全部”。")
 
-    # 搜索框
     render_search_bar()
 
     st.markdown("### 🔽 快速筛选")
-    current_category = st.session_state.selected_category
+    current_category = st.session_state.discover_category
     col1, col2, col3 = st.columns(3)
     with col1:
         if st.button("全部", key=get_category_button_key("all", current_category == "all"), use_container_width=True):
-            go_to_page("search", category="all", tag="all")
+            go_to_page("search", category="all")
             st.rerun()
     with col2:
         if st.button("水果", key=get_category_button_key("fruit", current_category == "fruit"), use_container_width=True):
-            go_to_page("search", category="fruit", tag="all")
+            go_to_page("search", category="fruit")
             st.rerun()
     with col3:
         if st.button("蔬菜", key=get_category_button_key("vegetable", current_category == "vegetable"), use_container_width=True):
-            go_to_page("search", category="vegetable", tag="all")
+            go_to_page("search", category="vegetable")
             st.rerun()
 
     st.markdown("### 🏷️ 标签筛选")
-    current_tag = st.session_state.selected_tag
-    tags = get_secondary_tags(st.session_state.selected_month)
-    if tags:
-        tag_cols = st.columns(4)
-        for idx, tag in enumerate(tags[:8]):
-            with tag_cols[idx % 4]:
-                is_active = current_tag == tag
-                if st.button(tag, key=get_tag_button_key(tag, is_active), use_container_width=True):
-                    go_to_page("search", tag=tag)
-                    st.rerun()
+    current_tag = st.session_state.discover_tag
+    tag_cols = st.columns(3)
+    with tag_cols[0]:
+        if st.button("全部", key=get_tag_button_key("all", current_tag == "all"), use_container_width=True):
+            go_to_page("search", tag="all")
+            st.rerun()
+    for idx, tag in enumerate(available_tags, start=1):
+        with tag_cols[idx % 3]:
+            is_active = current_tag == tag
+            if st.button(tag, key=get_tag_button_key(tag, is_active), use_container_width=True):
+                go_to_page("search", tag=tag)
+                st.rerun()
 
-    items = get_month_items(st.session_state.selected_month)
+    items = get_month_items(selected_month)
     filtered_items = filter_items(
         items,
-        keyword=st.session_state.keyword,
-        category=st.session_state.selected_category,
-        tag=st.session_state.selected_tag,
-        month=st.session_state.selected_month
+        keyword=st.session_state.discover_keyword,
+        category=st.session_state.discover_category,
+        tag=st.session_state.discover_tag,
+        month=selected_month
     )
 
     st.caption(f"📊 共找到 {len(filtered_items)} 个结果")
@@ -705,36 +936,62 @@ def render_search():
         cols = st.columns(2)
         for idx, item in enumerate(filtered_items):
             with cols[idx % 2]:
-                render_card(item, st.session_state.selected_month, compact=True, source="search")
+                render_card(item, selected_month, compact=True, source="search")
     else:
         st.info("😔 没有找到匹配的内容，试试换个关键词或筛选条件吧！")
 
 def render_favorites():
+    month_options = ["全部月份"] + months
+    selected_filter = st.selectbox(
+        "📅 收藏月份",
+        month_options,
+        index=month_options.index(st.session_state.favorites_month_filter),
+        key="favorites_month_select",
+    )
+    st.session_state.favorites_month_filter = selected_filter
+
+    display_entries = get_display_favorites(selected_filter)
 
     if not st.session_state.favorites:
         st.markdown("## ⭐ 我的收藏")
         st.info("你还没有收藏任何果蔬\n\n💡 点击果蔬卡片上的星号来收藏喜欢的果蔬")
         return
 
-    st.markdown(f"## ⭐ 我的收藏 ({len(st.session_state.favorites)})")
+    st.markdown(f"## ⭐ 我的收藏 ({len(display_entries)})")
 
-    # 收藏列表
-    for name in st.session_state.favorites:
-        item, month = get_item_by_name(name)
-        if item:
-            render_card(item, month, compact=False, source="favorites")
+    if not display_entries:
+        st.info("当前月份筛选下还没有收藏内容。")
+    else:
+        for entry in display_entries:
+            render_card(
+                entry["item"],
+                entry["month"],
+                compact=False,
+                source=f"favorites_{selected_filter}",
+                show_view=True,
+                remove_all_same_name_on_unfavorite=(selected_filter == "全部月份"),
+            )
 
-    # 清空收藏按钮
-    if len(st.session_state.favorites) > 0:
-        col1, col2 = st.columns([4, 1])
-        with col2:
-            if st.button("清空收藏", key="clear_favorites", help="清空所有收藏"):
+    action_col1, action_col2 = st.columns([3, 2])
+    with action_col2:
+        if st.button("清空收藏", key="clear_favorites", help="清空所有收藏", use_container_width=True):
+            st.session_state.favorites_confirm_clear = True
+
+    if st.session_state.favorites_confirm_clear:
+        st.warning("确认清空全部收藏吗？这个操作会移除所有月份的收藏记录。")
+        confirm_col1, confirm_col2 = st.columns(2)
+        with confirm_col1:
+            if st.button("确认清空", key="confirm_clear_favorites", use_container_width=True):
                 st.session_state.favorites = []
+                st.session_state.favorites_confirm_clear = False
+                st.rerun()
+        with confirm_col2:
+            if st.button("取消", key="cancel_clear_favorites", use_container_width=True):
+                st.session_state.favorites_confirm_clear = False
                 st.rerun()
 
 def render_detail():
-    item_name = st.session_state.selected_item
-    item, month = get_item_by_name(item_name)
+    item, month = get_item_by_ref(st.session_state.selected_item)
 
     if not item:
         st.warning("❌ 未找到该果蔬信息")
@@ -745,9 +1002,9 @@ def render_detail():
     st.caption(f"📅 {month} · {'🍎 水果' if is_fruit(item, month) else '🥬 蔬菜'}")
 
     # 大图
-    image_path = get_image_path(item["name"])
+    image_path = get_image_path(item)
     if image_path:
-        st.image(str(image_path), use_container_width=True)
+        render_responsive_image(image_path)
 
     # 标签
     tags = item.get("tags", [])
@@ -772,6 +1029,16 @@ def render_detail():
     st.markdown("### 🍳 常见吃法")
     st.write(item.get("recipe", "适合直接食用或做简单家常搭配。"))
 
+    related_items = get_related_items(item, month)
+    st.markdown("### 🌟 相关推荐")
+    if related_items:
+        cols = st.columns(2)
+        for idx, related_item in enumerate(related_items):
+            with cols[idx % 2]:
+                render_card(related_item, month, compact=True, source=f"related_{normalize_key(item['name'])}")
+    else:
+        st.info("暂时没有更多相关推荐。")
+
 # 主页面渲染
 render_header()
 
@@ -794,8 +1061,9 @@ if st.session_state.page in ["home", "search", "favorites"]:
     .bottom-nav-wrap {
         position: fixed;
         bottom: 0;
-        left: 0;
-        right: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(100%, 390px);
         background: white;
         border-top: 1px solid #EAEAEA;
         padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
@@ -834,6 +1102,14 @@ if st.session_state.page in ["home", "search", "favorites"]:
         color: #222222 !important;
         font-weight: 600 !important;
     }
+    @media (max-width: 768px) {
+        .bottom-nav-wrap {
+            left: 0;
+            right: 0;
+            width: 100%;
+            transform: none;
+        }
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -846,7 +1122,7 @@ if st.session_state.page in ["home", "search", "favorites"]:
             st.rerun()
     with nav2:
         search_key = "bottom_nav_search_active" if current_page == "search" else "bottom_nav_search"
-        if st.button("🔍 搜索", key=search_key, use_container_width=True):
+        if st.button("🔍 发现", key=search_key, use_container_width=True):
             go_to_page("search")
             st.rerun()
     with nav3:
