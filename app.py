@@ -131,6 +131,13 @@ div[class*="st-key-view_"] > button {
     color: #2E7D32;
 }
 
+div[class*="st-key-view_"] button {
+    min-height: 42px !important;
+    font-size: 14px !important;
+    padding: 0 16px !important;
+    border-radius: 10px !important;
+}
+
 div.st-key-refresh_today_recommendations button {
     min-height: 36px !important;
     padding: 0 14px !important;
@@ -151,39 +158,102 @@ div.st-key-refresh_today_recommendations button:hover {
     box-shadow: none !important;
 }
 
-/* 收藏按钮 */
-div[class*="st-key-favwrap_"] div[data-testid="stButton"] > button {
+div[class*="st-key-card_action_row_"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 44px !important;
+    gap: 12px !important;
+    align-items: center !important;
+}
+
+div[class*="st-key-card_action_row_"] [data-testid="column"] {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+div[class*="st-key-card_action_row_"] [data-testid="column"]:last-child {
+    justify-content: flex-end;
+}
+div[class*="st-key-card_action_row_"] [data-testid="column"]:last-child div[data-testid="stButton"] > button {
     width: 38px;
     min-width: 38px;
     height: 38px;
     min-height: 38px;
-    padding: 0;
-    border-radius: 12px;
-    background: #F3F4F7;
-    border: 1px solid #E1E4EA;
-    color: #8B93A1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    font-size: 16px !important;
+    padding: 0 !important;
+    border-radius: 12px !important;
+    background: #F3F4F7 !important;
+    border: 1px solid #E1E4EA !important;
+    color: #C7CDD8 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
     line-height: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #C7CDD8 !important;
+    text-align: center !important;
+}
+
+div[class*="st-key-card_action_row_"] [data-testid="column"]:last-child div[data-testid="stButton"] > button p,
+div[data-testid="stButton"][class*="st-key-detail_fav_btn"] > button p,
+div[class*="st-key-favwrap_detail_"] button p,
+div[class*="st-key-favwrap_on_detail_"] button p,
+div[class*="st-key-fav_"] button p,
+div[class*="st-key-fav_on_"] button p {
+    margin: 0 !important;
+    width: 100% !important;
+    line-height: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+div[class*="st-key-card_action_row_"] [data-testid="column"]:last-child div[data-testid="stButton"] > button:hover {
+    background: #ECEFF4 !important;
+    border-color: #D5DAE3 !important;
+    color: #AEB6C2 !important;
     box-shadow: none !important;
     transform: none !important;
 }
 
-div[class*="st-key-favwrap_"] div[data-testid="stButton"] > button:hover {
-    background: #ECEFF4;
-    border-color: #D5DAE3;
-    color: #6F7785;
-    transform: none;
-    box-shadow: none !important;
+div[class*="st-key-fav_"] button {
+    background: #F3F4F7 !important;
+    border: 1px solid #E1E4EA !important;
+    color: #C7CDD8 !important;
 }
 
-div[class*="st-key-favwrap_on_"] div[data-testid="stButton"] > button {
-    background: #F3F4F7;
-    border-color: #DCE7DA;
-    color: #9FD39A;
+div[class*="st-key-fav_"] button:hover {
+    background: #ECEFF4 !important;
+    border-color: #D5DAE3 !important;
+    color: #AEB6C2 !important;
+}
+
+div[class*="st-key-fav_on_"] button {
+    background: #F3F4F7 !important;
+    border: 1px solid #DCE7DA !important;
+    color: #9FD39A !important;
+}
+
+div[data-testid="stButton"][class*="st-key-detail_fav_btn"] > button,
+div[class*="st-key-favwrap_detail_"] button,
+div[class*="st-key-favwrap_on_detail_"] button {
+    color: #C7CDD8 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+div[data-testid="stButton"][class*="st-key-detail_fav_btn"] > button:hover,
+div[class*="st-key-favwrap_detail_"] button:hover,
+div[class*="st-key-favwrap_on_detail_"] button:hover {
+    color: #AEB6C2 !important;
+}
+
+div[class*="st-key-favwrap_on_detail_"] button {
+    color: #9FD39A !important;
 }
 
 /* 分类按钮 */
@@ -242,6 +312,21 @@ div[class*="st-key-tag2_active_"] button {
     color: #FFFFFF !important;
     border: none !important;
     font-weight: 600 !important;
+}
+
+div.st-key-discover_category_wrap [data-testid="stHorizontalBlock"],
+div.st-key-discover_tag_wrap [data-testid="stHorizontalBlock"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    align-items: flex-start !important;
+}
+
+div.st-key-discover_category_wrap [data-testid="column"],
+div.st-key-discover_tag_wrap [data-testid="column"] {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    min-width: fit-content !important;
 }
 
 /* 底部导航栏 - 移动端优化 */
@@ -410,6 +495,34 @@ div[data-testid="stImage"] > div > img {
     .main .block-container {
         border-radius: 28px 28px 0 0;
         margin-top: 12px;
+    }
+}
+
+div.st-key-top_header_shell {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(100%, 390px);
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #EEF1F4;
+    padding: 8px 12px 6px;
+}
+
+div.st-key-top_header_shell [data-testid="stHorizontalBlock"] {
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    div.st-key-top_header_shell {
+        left: 0;
+        right: 0;
+        width: 100%;
+        transform: none;
+        padding-left: 8px;
+        padding-right: 8px;
     }
 }
 </style>
@@ -722,40 +835,44 @@ def filter_items(items, keyword="", category="all", tag="all", month=None):
 
 # UI组件函数
 def render_header():
-    header_col1, header_col2, header_col3 = st.columns([1, 3, 1])
+    main_pages = ["home", "search", "favorites"]
+    header_container = st.container(key="top_header_shell") if st.session_state.page in main_pages else st.container()
 
-    with header_col1:
-        # 返回按钮（仅在非首页显示）
-        if st.session_state.page not in ["home", "search", "favorites"]:
-            if st.button("←", key="back_btn", help="返回"):
-                go_to_page(st.session_state.last_main_page)
-                st.rerun()
+    with header_container:
+        header_col1, header_col2, header_col3 = st.columns([1, 3, 1])
 
-    with header_col2:
-        # 标题
-        if st.session_state.page == "home":
-            st.title("🥬 应季果蔬")
-        elif st.session_state.page == "search":
-            st.title("🔍 发现")
-        elif st.session_state.page == "favorites":
-            st.title("⭐ 我的收藏")
-        elif st.session_state.page == "detail":
-            item, _ = get_item_by_ref(st.session_state.selected_item)
-            if item:
-                st.title(item["name"])
+        with header_col1:
+            # 返回按钮（仅在非首页显示）
+            if st.session_state.page not in main_pages:
+                if st.button("←", key="back_btn", help="返回"):
+                    go_to_page(st.session_state.last_main_page)
+                    st.rerun()
 
-    with header_col3:
-        # 收藏按钮（仅在详情页显示）
-        if st.session_state.page == "detail":
-            item, month = get_item_by_ref(st.session_state.selected_item)
-            if item:
-                active_fav = is_favorite(item["name"], month)
-                icon = "★" if active_fav else "☆"
-                wrap_key = f"favwrap_on_detail_{normalize_key(item['name'])}_{month}" if active_fav else f"favwrap_detail_{normalize_key(item['name'])}_{month}"
-                with st.container(key=wrap_key):
-                    if st.button(icon, key="detail_fav_btn", help="收藏/取消收藏"):
-                        toggle_favorite(item["name"], month)
-                        st.rerun()
+        with header_col2:
+            # 标题
+            if st.session_state.page == "home":
+                st.title("🥬 应季果蔬")
+            elif st.session_state.page == "search":
+                st.title("🔍 发现")
+            elif st.session_state.page == "favorites":
+                st.title("⭐ 我的收藏")
+            elif st.session_state.page == "detail":
+                item, _ = get_item_by_ref(st.session_state.selected_item)
+                if item:
+                    st.title(item["name"])
+
+        with header_col3:
+            # 收藏按钮（仅在详情页显示）
+            if st.session_state.page == "detail":
+                item, month = get_item_by_ref(st.session_state.selected_item)
+                if item:
+                    active_fav = is_favorite(item["name"], month)
+                    icon = "★"
+                    wrap_key = f"favwrap_on_detail_{normalize_key(item['name'])}_{month}" if active_fav else f"favwrap_detail_{normalize_key(item['name'])}_{month}"
+                    with st.container(key=wrap_key):
+                        if st.button(icon, key="detail_fav_btn", help="收藏/取消收藏"):
+                            toggle_favorite(item["name"], month)
+                            st.rerun()
 
 def render_search_bar():
     apply_pending_discover_search_input()
@@ -775,16 +892,6 @@ def render_search_bar():
             submit_discover_search()
             st.rerun()
 
-    # 搜索建议
-    if st.session_state.discover_search_suggestions and st.session_state.discover_search_input.strip():
-        st.caption("搜索建议")
-        suggestion_cols = st.columns(min(5, len(st.session_state.discover_search_suggestions)))
-        for idx, suggestion in enumerate(st.session_state.discover_search_suggestions):
-            with suggestion_cols[idx % len(suggestion_cols)]:
-                if st.button(suggestion, key=f"suggestion_{normalize_key(suggestion)}", help=f"搜索{suggestion}", use_container_width=True):
-                    submit_discover_search(suggestion, sync_input=True)
-                    st.rerun()
-
 def render_card(item, month, compact=True, source="default", show_view=True, remove_all_same_name_on_unfavorite=False):
     image_path = get_image_path(item)
 
@@ -795,19 +902,8 @@ def render_card(item, month, compact=True, source="default", show_view=True, rem
         else:
             st.caption(f"📷 未找到图片：{item['name']}")
 
-        # 标题和收藏
-        col1, col2 = st.columns([5, 1])
-        with col1:
-            st.markdown(f"### {item['name']}")
-        with col2:
-            active_fav = is_favorite(item["name"], month)
-            icon = "★" if active_fav else "☆"
-            fav_prefix = "fav_on" if active_fav else "fav"
-            wrap_key = f"favwrap_on_{source}_{normalize_key(item['name'])}_{month}_{compact}" if active_fav else f"favwrap_{source}_{normalize_key(item['name'])}_{month}_{compact}"
-            with st.container(key=wrap_key):
-                if st.button(icon, key=f"{fav_prefix}_{source}_{normalize_key(item['name'])}_{month}_{compact}"):
-                    toggle_favorite(item["name"], month, remove_all_same_name=remove_all_same_name_on_unfavorite and active_fav)
-                    st.rerun()
+        # 标题
+        st.markdown(f"### {item['name']}")
 
         # 标签
         tags = item.get("tags", [])[:3 if compact else 6]
@@ -825,11 +921,22 @@ def render_card(item, month, compact=True, source="default", show_view=True, rem
         if not compact:
             st.caption(f"💪 营养：{item.get('nutrition', '暂无信息')}")
 
-        # 查看详情按钮
-        if show_view:
-            if st.button("查看详情", key=f"view_{source}_{normalize_key(item['name'])}_{month}_{compact}"):
-                open_detail(item["name"], month)
-                st.rerun()
+        # 底部操作区
+        row_key = f"card_action_row_{source}_{normalize_key(item['name'])}_{month}_{compact}"
+        with st.container(key=row_key):
+            action_col1, action_col2 = st.columns([5, 1], vertical_alignment="center")
+            with action_col1:
+                if show_view:
+                    if st.button("查看详情", key=f"view_{source}_{normalize_key(item['name'])}_{month}_{compact}"):
+                        open_detail(item["name"], month)
+                        st.rerun()
+            with action_col2:
+                active_fav = is_favorite(item["name"], month)
+                icon = "★"
+                fav_key_prefix = "fav_on" if active_fav else "fav"
+                if st.button(icon, key=f"{fav_key_prefix}_{source}_{normalize_key(item['name'])}_{month}_{compact}"):
+                    toggle_favorite(item["name"], month, remove_all_same_name=remove_all_same_name_on_unfavorite and active_fav)
+                    st.rerun()
 
 def render_home():
     selected_month = st.selectbox(
@@ -869,11 +976,6 @@ def render_home():
     else:
         st.info("这个月份暂时没有可展示的热门果蔬。")
 
-    if st.button("去发现更多", key="home_discover_more", use_container_width=True):
-        st.session_state.discover_month = selected_month
-        st.session_state.page = "search"
-        st.rerun()
-
 def render_search():
     selected_month = st.selectbox(
         "📅 发现月份",
@@ -892,34 +994,40 @@ def render_search():
     render_search_bar()
 
     st.markdown("### 🔽 快速筛选")
-    current_category = st.session_state.discover_category
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        if st.button("全部", key=get_category_button_key("all", current_category == "all"), use_container_width=True):
-            go_to_page("search", category="all")
-            st.rerun()
-    with col2:
-        if st.button("水果", key=get_category_button_key("fruit", current_category == "fruit"), use_container_width=True):
-            go_to_page("search", category="fruit")
-            st.rerun()
-    with col3:
-        if st.button("蔬菜", key=get_category_button_key("vegetable", current_category == "vegetable"), use_container_width=True):
-            go_to_page("search", category="vegetable")
-            st.rerun()
+    category_label_map = {"全部": "all", "水果": "fruit", "蔬菜": "vegetable"}
+    current_category_label = next(
+        (label for label, value in category_label_map.items() if value == st.session_state.discover_category),
+        "全部",
+    )
+
+    selected_category_label = st.pills(
+        "快速筛选",
+        options=list(category_label_map.keys()),
+        default=current_category_label,
+        label_visibility="collapsed",
+    )
+    selected_category_value = category_label_map.get(selected_category_label or "全部", "all")
+    if selected_category_value != st.session_state.discover_category:
+        st.session_state.discover_category = selected_category_value
+        st.rerun()
 
     st.markdown("### 🏷️ 标签筛选")
-    current_tag = st.session_state.discover_tag
-    tag_cols = st.columns(3)
-    with tag_cols[0]:
-        if st.button("全部", key=get_tag_button_key("all", current_tag == "all"), use_container_width=True):
-            go_to_page("search", tag="all")
-            st.rerun()
-    for idx, tag in enumerate(available_tags, start=1):
-        with tag_cols[idx % 3]:
-            is_active = current_tag == tag
-            if st.button(tag, key=get_tag_button_key(tag, is_active), use_container_width=True):
-                go_to_page("search", tag=tag)
-                st.rerun()
+    tag_items = ["全部"] + available_tags
+    current_tag_label = "全部" if st.session_state.discover_tag == "all" else st.session_state.discover_tag
+    if current_tag_label not in tag_items:
+        current_tag_label = "全部"
+        st.session_state.discover_tag = "all"
+
+    selected_tag_label = st.pills(
+        "标签筛选",
+        options=tag_items,
+        default=current_tag_label,
+        label_visibility="collapsed",
+    )
+    selected_tag_value = "all" if (selected_tag_label or "全部") == "全部" else selected_tag_label
+    if selected_tag_value != st.session_state.discover_tag:
+        st.session_state.discover_tag = selected_tag_value
+        st.rerun()
 
     items = get_month_items(selected_month)
     filtered_items = filter_items(
@@ -1042,6 +1150,9 @@ def render_detail():
 # 主页面渲染
 render_header()
 
+if st.session_state.page in ["home", "search", "favorites"]:
+    st.markdown("<div style='height: 86px;'></div>", unsafe_allow_html=True)
+
 # 根据页面状态渲染内容
 if st.session_state.page == "home":
     render_home()
@@ -1058,7 +1169,7 @@ if st.session_state.page in ["home", "search", "favorites"]:
     st.markdown("<div style='height: 88px;'></div>", unsafe_allow_html=True)
     st.markdown("""
     <style>
-    .bottom-nav-wrap {
+    div.st-key-bottom_nav_shell {
         position: fixed;
         bottom: 0;
         left: 50%;
@@ -1070,40 +1181,50 @@ if st.session_state.page in ["home", "search", "favorites"]:
         z-index: 999;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     }
-    div.st-key-bottom_nav_home button,
-    div.st-key-bottom_nav_home_active button,
-    div.st-key-bottom_nav_search button,
-    div.st-key-bottom_nav_search_active button,
-    div.st-key-bottom_nav_favorites button,
-    div.st-key-bottom_nav_favorites_active button {
+    div.st-key-bottom_nav_shell [data-testid="stHorizontalBlock"] {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        align-items: stretch;
+    }
+    div.st-key-bottom_nav_shell [data-testid="column"] {
+        width: 100% !important;
+    }
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_home button,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_home_active button,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_search button,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_search_active button,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_favorites button,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_favorites_active button {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
         min-height: 52px !important;
+        width: 100% !important;
         color: #9E9E9E !important;
-        font-size: 18px !important;
+        font-size: 16px !important;
         font-weight: 500 !important;
         padding: 6px 8px !important;
     }
-    div.st-key-bottom_nav_home button:hover,
-    div.st-key-bottom_nav_home_active button:hover,
-    div.st-key-bottom_nav_search button:hover,
-    div.st-key-bottom_nav_search_active button:hover,
-    div.st-key-bottom_nav_favorites button:hover,
-    div.st-key-bottom_nav_favorites_active button:hover {
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_home button:hover,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_home_active button:hover,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_search button:hover,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_search_active button:hover,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_favorites button:hover,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_favorites_active button:hover {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
         transform: none !important;
     }
-    div.st-key-bottom_nav_home_active button,
-    div.st-key-bottom_nav_search_active button,
-    div.st-key-bottom_nav_favorites_active button {
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_home_active button,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_search_active button,
+    div.st-key-bottom_nav_shell div.st-key-bottom_nav_favorites_active button {
         color: #222222 !important;
         font-weight: 600 !important;
     }
     @media (max-width: 768px) {
-        .bottom-nav-wrap {
+        div.st-key-bottom_nav_shell {
             left: 0;
             right: 0;
             width: 100%;
@@ -1113,21 +1234,20 @@ if st.session_state.page in ["home", "search", "favorites"]:
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown("<div class='bottom-nav-wrap'>", unsafe_allow_html=True)
-    nav1, nav2, nav3 = st.columns(3)
-    with nav1:
-        home_key = "bottom_nav_home_active" if current_page == "home" else "bottom_nav_home"
-        if st.button("🏠 首页", key=home_key, use_container_width=True):
-            go_to_page("home")
-            st.rerun()
-    with nav2:
-        search_key = "bottom_nav_search_active" if current_page == "search" else "bottom_nav_search"
-        if st.button("🔍 发现", key=search_key, use_container_width=True):
-            go_to_page("search")
-            st.rerun()
-    with nav3:
-        fav_key = "bottom_nav_favorites_active" if current_page == "favorites" else "bottom_nav_favorites"
-        if st.button("⭐ 收藏", key=fav_key, use_container_width=True):
-            go_to_page("favorites")
-            st.rerun()
-    st.markdown("</div>", unsafe_allow_html=True)
+    with st.container(key="bottom_nav_shell"):
+        nav1, nav2, nav3 = st.columns(3)
+        with nav1:
+            home_key = "bottom_nav_home_active" if current_page == "home" else "bottom_nav_home"
+            if st.button("🏠 首页", key=home_key, use_container_width=True):
+                go_to_page("home")
+                st.rerun()
+        with nav2:
+            search_key = "bottom_nav_search_active" if current_page == "search" else "bottom_nav_search"
+            if st.button("🔍 发现", key=search_key, use_container_width=True):
+                go_to_page("search")
+                st.rerun()
+        with nav3:
+            fav_key = "bottom_nav_favorites_active" if current_page == "favorites" else "bottom_nav_favorites"
+            if st.button("⭐ 收藏", key=fav_key, use_container_width=True):
+                go_to_page("favorites")
+                st.rerun()
